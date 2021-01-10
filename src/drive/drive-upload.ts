@@ -49,7 +49,7 @@ function createFolderOrEmpty(drive: drive_v3.Drive, filePath: string, parent: st
     });
 }
 
-export function getSharableLink(fileId: string, isFolder: boolean, 
+export function getSharableLink(fileId: string, isFolder: boolean,
   callback: (err: string, url: string, isFolder: boolean) => void): void {
 
   if (!constants.IS_TEAM_DRIVE || (constants.IS_TEAM_DRIVE && !isFolder)) {

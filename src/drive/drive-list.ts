@@ -83,7 +83,11 @@ function generateFilesListMessage(files: any[]): string {
   var message = '';
   if (files.length > 0) {
     for (var i = 0; i < files.length; i++) {
-      message += '<a href = \'' + files[i]['url'] + '\'>' + files[i]['name'] + '</a>';
+      if (constants.INDEX_URL) {
+        message += '<a href = \'' + constants.INDEX_URL + files[i]['name'] + '\'>' + files[i]['name'] + '</a>';
+      } else {
+        message += '<a href = \'' + files[i]['url'] + '\'>' + files[i]['name'] + '</a>';
+      }
 
       if (files[i]['size'])
         message += ' (' + dlUtils.formatSize(files[i]['size']) + ')\n';

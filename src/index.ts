@@ -114,9 +114,15 @@ setEventCallback(eventRegex.commandsRegex.getFolder, eventRegex.commandsRegexNoN
   if (msgTools.isAuthorized(msg) < 0) {
     msgTools.sendUnauthorizedMessage(bot, msg);
   } else {
-    msgTools.sendMessage(bot, msg,
-      '<a href = \'' + driveUtils.getFileLink(constants.GDRIVE_PARENT_DIR_ID, true) + '\'>Drive mirror folder</a>',
-      60000);
+    if (!constants.INDEX_URL) {
+      msgTools.sendMessage(bot, msg,
+        '<a href = \'' + driveUtils.getFileLink(constants.GDRIVE_PARENT_DIR_ID, true) + '\'>Drive mirror folder</a>',
+        60000);
+    } else {
+      msgTools.sendMessage(bot, msg,
+        '<a href = \'' + constants.INDEX_URL + '\'>Drive mirror folder</a>',
+        60000);
+    }
   }
 });
 
@@ -567,6 +573,9 @@ function driveUploadCompleteCallback(err: string, gid: string, url: string, file
     finalMessage = `Failed to upload <code>${fileName}</code> to Drive. ${message}`;
     cleanupDownload(gid, finalMessage);
   } else {
+    if (constants.INDEX_URL) {
+      url = constants.INDEX_URL + fileName
+    }
     console.log(`${gid}: Uploaded `);
     if (fileSize) {
       var fileSizeStr = downloadUtils.formatSize(fileSize);

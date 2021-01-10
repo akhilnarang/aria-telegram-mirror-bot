@@ -583,9 +583,6 @@ function driveUploadCompleteCallback(err: string, gid: string, url: string, file
     } else {
       finalMessage = `<a href='${url}'>${fileName}</a>`;
     }
-    if (constants.IS_TEAM_DRIVE && isFolder) {
-      finalMessage += '\n\n<i>Folders in Shared Drives can only be shared with members of the drive. Mirror as an archive if you need public links.</i>';
-    }
     cleanupDownload(gid, finalMessage, url);
   }
 }

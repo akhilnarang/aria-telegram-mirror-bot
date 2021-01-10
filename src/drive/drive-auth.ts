@@ -4,7 +4,7 @@ import { google } from 'googleapis';
 import { OAuth2Client } from 'google-auth-library';
 
 const SCOPE = 'https://www.googleapis.com/auth/drive';
-const TOKEN_PATH = './credentials.json';
+const TOKEN_PATH = './service_account.json';
 
 /**
  * Authorize a client with credentials, then call the Google Drive API.
@@ -12,9 +12,9 @@ const TOKEN_PATH = './credentials.json';
  */
 export function call(callback: (err: string, client: OAuth2Client) => void): void {
   // Load client secrets from a local file.
-  fs.readFile('./client_secret.json', 'utf8', (err, content) => {
+  fs.readFile(TOKEN_PATH, 'utf8', (err, content) => {
     if (err) {
-      console.log('Error loading client secret file:', err.message);
+      console.log('Error loading service_account file:', err.message);
       callback(err.message, null);
     } else {
       authorize(JSON.parse(content), callback);
@@ -28,18 +28,21 @@ export function call(callback: (err: string, client: OAuth2Client) => void): voi
  * @param {Object} credentials The authorization client credentials.
  * @param {function} callback The callback to call with the authorized client.
  */
-function authorize(credentials: any, callback: (err: string, client: OAuth2Client) => void): void {
-  const clientSecret = credentials.installed.client_secret;
-  const clientId = credentials.installed.client_id;
-  const redirectUris = credentials.installed.redirect_uris;
-  const oAuth2Client = new google.auth.OAuth2(
-    clientId, clientSecret, redirectUris[0]);
+function authorize(credentials: any, callback: (err: string, client: any) => void): void {
+  const jwtClient = new google.auth.JWT(
+    credentials.client_email,
+    null,
+    credentials.private_key,
+    [SCOPE],
+  );
 
-  // Check if we have previously stored a token.
-  fs.readFile(TOKEN_PATH, 'utf8', (err, token) => {
-    if (err) return getAccessToken(oAuth2Client, callback);
-    oAuth2Client.setCredentials(JSON.parse(token));
-    callback(null, oAuth2Client);
+  jwtClient.authorize(function (err, tokens) {
+    if (err) {
+      console.log(err);
+      return;
+    } else {
+      callback(null, jwtClient);
+    }
   });
 }
 

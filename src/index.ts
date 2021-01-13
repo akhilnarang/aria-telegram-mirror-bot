@@ -383,8 +383,9 @@ function deleteAllStatus(): void {
  * @param gid The gid for the download that just finished
  * @param message The message to send as the Telegram download complete message
  * @param url The public Google Drive URL for the uploaded file
+ * @param preserve Preserve files in case of upload failure
  */
-function cleanupDownload(gid: string, message: string, url?: string, dlDetails?: details.DlVars): void {
+function cleanupDownload(gid: string, message: string, url?: string, dlDetails?: details.DlVars, preserve?: boolean): void {
   if (!dlDetails) {
     dlDetails = dlManager.getDownloadByGid(gid);
   }
@@ -415,7 +416,9 @@ function cleanupDownload(gid: string, message: string, url?: string, dlDetails?:
     dlManager.removeCancelledDls(gid);
     dlManager.deleteDownload(gid);
     updateAllStatus();
-    downloadUtils.deleteDownloadedFile(dlDetails.downloadDir);
+    if (!preserve) {
+      downloadUtils.deleteDownloadedFile(dlDetails.downloadDir);
+    }
   } else {
     // Why is this message so calm? We should be SCREAMING at this point!
     console.error(`cleanupDownload: Could not get dlDetails for ${gid}`);
@@ -571,7 +574,7 @@ function driveUploadCompleteCallback(err: string, gid: string, url: string, file
     var message = err;
     console.error(`${gid}: Failed to upload - ${filePath}: ${message}`);
     finalMessage = `Failed to upload <code>${fileName}</code> to Drive. ${message}`;
-    cleanupDownload(gid, finalMessage);
+    cleanupDownload(gid, finalMessage, null, null, true);
   } else {
     if (constants.INDEX_URL) {
       url = constants.INDEX_URL + fileName

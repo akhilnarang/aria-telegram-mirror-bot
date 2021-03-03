@@ -120,7 +120,7 @@ setEventCallback(eventRegex.commandsRegex.getFolder, eventRegex.commandsRegexNoN
         60000);
     } else {
       msgTools.sendMessage(bot, msg,
-        '<a href = \'' + constants.INDEX_URL + '\'>Drive mirror folder</a>',
+        `<a href = '${constants.INDEX_URL} '>Drive mirror folder</a>`,
         60000);
     }
   }

@@ -84,7 +84,7 @@ function generateFilesListMessage(files: any[]): string {
   if (files.length > 0) {
     for (var i = 0; i < files.length; i++) {
       if (constants.INDEX_URL) {
-        message += '<a href = \'' + constants.INDEX_URL + files[i]['name'] + '\'>' + files[i]['name'] + '</a>';
+        message += `<a href = "${constants.INDEX_URL}${files[i]['name']}">${files[i]['name']}</a>`;
       } else {
         message += '<a href = \'' + files[i]['url'] + '\'>' + files[i]['name'] + '</a>';
       }

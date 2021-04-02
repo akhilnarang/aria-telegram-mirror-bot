@@ -582,9 +582,9 @@ function driveUploadCompleteCallback(err: string, gid: string, url: string, file
     console.log(`${gid}: Uploaded `);
     if (fileSize) {
       var fileSizeStr = downloadUtils.formatSize(fileSize);
-      finalMessage = `<a href='${url}'>${fileName}</a> (${fileSizeStr})`;
+      finalMessage = `<a href="${url}">${fileName}</a> (${fileSizeStr})`;
     } else {
-      finalMessage = `<a href='${url}'>${fileName}</a>`;
+      finalMessage = `<a href="${url}">${fileName}</a>`;
     }
     cleanupDownload(gid, finalMessage, url);
   }

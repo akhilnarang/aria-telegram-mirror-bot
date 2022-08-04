@@ -1,5 +1,4 @@
 import TelegramBot = require('node-telegram-bot-api');
-import uuid = require('uuid/v4');
 import downloadUtils = require('./download_tools/utils');
 import ariaTools = require('./download_tools/aria-tools.js');
 import constants = require('./.constants.js');
@@ -11,6 +10,7 @@ import details = require('./dl_model/detail');
 import filenameUtils = require('./download_tools/filename-utils');
 import { EventRegex } from './bot_utils/event_regex';
 import { exec } from 'child_process';
+import { v4 as uuid } from 'uuid';
 
 const eventRegex = new EventRegex();
 const bot = new TelegramBot(constants.TOKEN, { polling: true });

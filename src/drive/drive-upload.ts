@@ -73,14 +73,7 @@ export function getSharableLink(
       callback(err, null, false);
       return;
     }
-    const drive = google.drive({ version: "v3", auth });
-    createPermissions(drive, fileId)
-      .then(() => {
-        callback(null, utils.getFileLink(fileId, isFolder), isFolder);
-      })
-      .catch((err) => {
-        callback(err.message, null, false);
-      });
+    callback(null, utils.getFileLink(fileId, isFolder), isFolder);
   });
 }
 

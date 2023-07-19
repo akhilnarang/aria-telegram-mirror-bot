@@ -19,6 +19,7 @@
     "fs-extra": "^7.0.0",
     "googleapis": "^67.0.0",
     "http-range-parse": "^1.0.0",
+    "minipass": "^3.3.5",
     "node-telegram-bot-api": "^0.30.0",
     "tar": "^4.4.4",
     "typescript": "^3.5.3",

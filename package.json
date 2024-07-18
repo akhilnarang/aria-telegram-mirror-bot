@@ -10,24 +10,24 @@
   "license": "MIT",
   "dependencies": {
     "@types/fs-extra": "^9.0.13",
-    "@types/mime-types": "^2.1.1",
-    "@types/node-telegram-bot-api": "^0.64.6",
-    "@types/tar": "^6.1.2",
+    "@types/mime-types": "^2.1.4",
+    "@types/node-telegram-bot-api": "^0.64.7",
+    "@types/tar": "^6.1.13",
     "@types/uuid": "^8.3.4",
     "aria2": "^3.0.1",
     "diskspace": "^2.0.0",
     "fs-extra": "^10.1.0",
     "googleapis": "^140.0.1",
     "http-range-parse": "^1.0.0",
-    "minipass": "^3.3.5",
+    "minipass": "^3.3.6",
     "node-telegram-bot-api": "^0.65.1",
-    "tar": "^6.1.11",
-    "typescript": "^4.7.4",
+    "tar": "^6.2.1",
+    "typescript": "^4.9.5",
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^5.32.0",
-    "@typescript-eslint/parser": "^5.32.0",
-    "eslint": "^8.21.0"
+    "@typescript-eslint/eslint-plugin": "^5.62.0",
+    "@typescript-eslint/parser": "^5.62.0",
+    "eslint": "^8.57.0"
   }
 }
